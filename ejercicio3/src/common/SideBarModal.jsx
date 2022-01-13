@@ -5,7 +5,7 @@ import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 /* --------------------------- Image Dependencies --------------------------- */
-import { Close, Github, Product } from '../icons';
+import { Close, Editar } from '../icons';
 
 /* ------------------------- SideBarModal propTypes ------------------------ */
 const propTypes = {
@@ -140,7 +140,7 @@ function SideBarModal({
                     </p>
 
                     <h4>
-                      <Product />
+                      <Editar />
                       Hecho con el ♥ para Enviame &copy;
                     </h4>
                     <p>
@@ -152,22 +152,6 @@ function SideBarModal({
                         {data.link}
                       </a>
                     </p>
-                    {data.github && (
-                      <>
-                        <h4>
-                          <Github /> Github
-                        </h4>
-                        <p>
-                          <a
-                            href={data.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {data.github}
-                          </a>
-                        </p>
-                      </>
-                    )}
                   </div>
                   <a
                     className="open__project"

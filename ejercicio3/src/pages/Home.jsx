@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { PageWrapper } from '../common/Layout';
 import { MansoryItem } from '../common/MansoryItem';
-import Tabs from '../common/Tabs';
+import Buscador from '../common/Tabs';
 import Cursor from '../common/Cursor';
 
 let arrayRandomItem = (array) => {
@@ -65,13 +65,15 @@ function Home() {
     <main className="Main" title="Home">
       <Cursor />
       <div className="BackLay">
-        <h1 aria-hidden="true">Home</h1>
+        <h1 aria-hidden="true">
+          <a>Home</a>
+        </h1>
       </div>
       <div className="PageSection">
         <PageWrapper>
           <h1 className="intro__text">Home</h1>
 
-          <Tabs setData={setData} />
+          <Buscador setData={setData} />
 
           <div className="TabItems" label="All">
             <MansoryLayout>
@@ -89,7 +91,6 @@ function Home() {
                     );
                   })
                 : datos.map((item, index) => {
-                    console.log(item.name);
                     let altura = arrayRandomItem(alturas);
                     return (
                       <div key={index} ref={setLastElement}>
