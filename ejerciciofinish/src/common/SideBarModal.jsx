@@ -33,6 +33,12 @@ function SideBarModal({
   overlayColor,
   css: styling,
   data,
+  name,
+  descripcion,
+  edit,
+  setName,
+  setDescripcion,
+  setEdit,
 }) {
   const fecha = data.modified
     .split('T')[0]
@@ -51,6 +57,10 @@ function SideBarModal({
       window.removeEventListener('keydown', handleKeyPress);
     };
   }, []);
+
+  const handleEdit = () => {
+    setEdit(!edit);
+  };
   return (
     <>
       {show && (
@@ -91,18 +101,38 @@ function SideBarModal({
                   </div>
 
                   <div className="main__post">
-                    <h3 className="mt-4">{data.name}</h3>
+                    {edit ? (
+                      <input
+                        type="text"
+                        className="form__field"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    ) : (
+                      <h3 className="mt-4">{name}</h3>
+                    )}
                     {/* <p className="te mb-4">{data.description}</p> */}
                     <img
                       src={`${data.thumbnail.path}/standard_fantastic.jpg`}
                       alt={data.name}
                     />
                     <h4>Description</h4>
-                    <p>
-                      {data.description === ''
-                        ? 'Puedes creer que no haya descripcion de un personaje tan genial? Aún no le ha llegado, Deberian usar enviame 😉'
-                        : data.description}
-                    </p>
+                    {edit ? (
+                      <input
+                        type="text"
+                        className="form__field d"
+                        value={descripcion}
+                        onChange={(e) => setDescripcion(e.target.value)}
+                      />
+                    ) : (
+                      <p>
+                        {descripcion === ''
+                          ? setDescripcion(
+                              'Puedes creer que no haya descripcion de un personaje tan genial? Aún no le ha llegado, Deberian usar enviame 😉'
+                            )
+                          : descripcion}
+                      </p>
+                    )}
                     <h4>Ultima Modificacion</h4>
 
                     <p className="d-flex flex-wrap">
@@ -140,13 +170,13 @@ function SideBarModal({
                     )}
                   </div>
                   <a
-                    href={data.link}
                     className="open__project"
                     target="_blank"
                     id="cardHover"
+                    onClick={handleEdit}
                     rel="noopener noreferrer"
                   >
-                    Open Project{' '}
+                    {edit ? 'Guardar' : 'Editar Nombre y Descripcion'}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"

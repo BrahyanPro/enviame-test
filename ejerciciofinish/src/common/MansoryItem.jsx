@@ -3,15 +3,11 @@ import React, { useState } from 'react';
 import Image from './Image';
 import SideBarModal from './SideBarModal';
 
-export function MansoryItem({
-  item,
-  altura,
-  name,
-  descripcion,
-  setName,
-  setDescripcion,
-}) {
+export function MansoryItem({ item, altura }) {
   const [show, setShow] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [name, setName] = useState(item.name);
+  const [descripcion, setDescripcion] = useState(item.description);
 
   const fecha = item.modified
     .split('T')[0]
@@ -36,11 +32,12 @@ export function MansoryItem({
       >
         <Image src={`${item.thumbnail.path}/portrait_uncanny.jpg`} alt={name} />
         <div className="content__slate">
-          <h3>{item.name}</h3>
+          <h3>{name}</h3>
+
           <p>
-            {item.description === ''
+            {descripcion === ''
               ? 'Puedes creer que no haya descripcion de un heroe tan genial? Aún no le ha llegado, Deberian usar enviame 😉'
-              : item.description}
+              : descripcion}
           </p>
 
           <p className="d-flex flex-wrap">
@@ -55,7 +52,11 @@ export function MansoryItem({
         size="lg"
         data={item}
         name={name}
+        setName={setName}
         descripcion={descripcion}
+        setDescripcion={setDescripcion}
+        edit={isEditing}
+        setEdit={setIsEditing}
       />
     </>
   );

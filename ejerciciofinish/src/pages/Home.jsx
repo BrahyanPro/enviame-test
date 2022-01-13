@@ -20,8 +20,7 @@ function Proyectos() {
   const [pageNum, setPageNum] = useState(0);
   const [lastElement, setLastElement] = useState(null);
   const [data, setData] = useState([]);
-  const [name, setName] = useState('');
-  const [descripcion, setDescripcion] = useState('');
+
   const observer = useRef(
     new IntersectionObserver((entries) => {
       const first = entries[0];
@@ -73,7 +72,7 @@ function Proyectos() {
         <PageWrapper>
           <h1 className="intro__text">Home</h1>
 
-          <Tabs setDescripcion={setDescripcion} />
+          <Tabs setData={setData} />
 
           <div className="TabItems" label="All">
             <MansoryLayout>
@@ -86,10 +85,6 @@ function Proyectos() {
                           index={index}
                           item={item}
                           altura={altura}
-                          name={name}
-                          descripcion={descripcion}
-                          setData={setData}
-                          setName={setName}
                         />
                       </div>
                     );
@@ -103,8 +98,6 @@ function Proyectos() {
                           index={index}
                           item={item}
                           altura={altura}
-                          name={name}
-                          descripcion={descripcion}
                         />
                       </div>
                     );
