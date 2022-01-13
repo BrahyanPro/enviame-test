@@ -1,14 +1,13 @@
 const app = new Vue({
     el: '#app',
     data: {
-        message: 'Hello Vue!',
+        message: 'Desde el corazon para ser parte de Enviame!',
         num1: 1,
         num2: 10,
     },
     methods: {
         rango: function range(start, end) {
-            if (start === end) return [start];
-            return [start, ...range(start + 1, end)];
+            return Array.from({ length: end - start + 1 }, (_, i) => i);
         },
         validarPrimo: function(numero) {
             for (let i = 2, raiz = Math.sqrt(numero); i <= raiz; i++)
@@ -16,9 +15,9 @@ const app = new Vue({
             return numero > 1 && numero;
         },
         obtenerPrimo: function() {
-            const numeros = this.rango(parseInt(this.num1), parseInt(this.num2));
+            const numeros = this.rango(this.num1, this.num2);
             const primos = numeros.map((numero) => this.validarPrimo(numero));
-            return primos.filter((e) => typeof e === 'number');
+            return primos.filter((num) => typeof num === 'number');
         },
     },
     computed: {

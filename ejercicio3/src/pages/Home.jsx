@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { PageWrapper } from '../common/Layout';
 import { MansoryItem } from '../common/MansoryItem';
@@ -9,12 +9,13 @@ let arrayRandomItem = (array) => {
   return array[(Math.random() * array.length) | 0];
 };
 
-let TOTAL_PAGES = 2626;
-let state = ['400px', '454px', '310px'];
+let TOTAL_PAGES = 2626; //Total de personajes en la api, como esa info estaba disponible decidi ahorrar recursos y efuerzos.
+
+let alturas = ['400px', '454px', '310px'];
 
 const apikey = '6ac743f183f919b6880c013e82a88782';
 
-function Proyectos() {
+function Home() {
   const [loading, setLoading] = useState(true);
   const [datos, setdatos] = useState([]);
   const [pageNum, setPageNum] = useState(0);
@@ -60,8 +61,6 @@ function Proyectos() {
     };
   }, [lastElement]);
 
-  // console.log(datos);
-
   return (
     <main className="Main" title="Home">
       <Cursor />
@@ -78,7 +77,7 @@ function Proyectos() {
             <MansoryLayout>
               {data.length > 0
                 ? data.map((item, index) => {
-                    let altura = arrayRandomItem(state);
+                    let altura = arrayRandomItem(alturas);
                     return (
                       <div key={index} ref={setLastElement}>
                         <MansoryItem
@@ -91,7 +90,7 @@ function Proyectos() {
                   })
                 : datos.map((item, index) => {
                     console.log(item.name);
-                    let altura = arrayRandomItem(state);
+                    let altura = arrayRandomItem(alturas);
                     return (
                       <div key={index} ref={setLastElement}>
                         <MansoryItem
@@ -116,7 +115,7 @@ function Proyectos() {
   );
 }
 
-export default Proyectos;
+export default Home;
 
 const MansoryLayout = ({ children }) => {
   return <div className="Layout">{children}</div>;

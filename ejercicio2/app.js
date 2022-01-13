@@ -50,6 +50,30 @@ function main() {
 }
 const finish = main();
 
-console.log(finish);
+var jsonStr = JSON.stringify(finish);
+(regeStr = ''),
+(f = {
+    brace: 0,
+});
 
-module.export = finish;
+//Esto es para que el string del objeto tenga un poco de forma y sea mas agradable a la vista, solo es estilizar con expresiones regulares, nunca lo habia hecho antes pero aprendi algo nuevo, cool
+regeStr = jsonStr.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, function(m, p1) {
+    var rtnFn = function() {
+            return (
+                '<div style="text-indent: ' + f['brace'] * 20 + 'px;">' + p1 + '</div>'
+            );
+        },
+        rtnStr = 0;
+    if (p1.lastIndexOf('{') === p1.length - 1) {
+        rtnStr = rtnFn();
+        f['brace'] += 1;
+    } else if (p1.indexOf('}') === 0) {
+        f['brace'] -= 1;
+        rtnStr = rtnFn();
+    } else {
+        rtnStr = rtnFn();
+    }
+    return rtnStr;
+});
+
+document.body.innerHTML += regeStr;
